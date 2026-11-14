@@ -48,7 +48,7 @@ failures that do the most damage quietly.
 
 ## License
 
-- The guide's text is licensed under [CC BY 4.0](LICENSE): reuse it with
-  credit to Synergy Geeks.
+- The guide's text is © 2026 Tim Dasher, licensed under
+  [CC BY 4.0](LICENSE): reuse it with credit to Tim Dasher.
 - The templates are licensed under [MIT-0](templates/LICENSE): copy them into
   your projects freely, with no notice needed.
