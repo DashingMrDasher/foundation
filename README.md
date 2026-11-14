@@ -201,4 +201,6 @@ Small rules that save a lot of time and attention:
 
 ---
 
-*Licensed under [CC BY 4.0](LICENSE). Diagrams are text-defined (Mermaid).*
+*Guide licensed under [CC BY 4.0](LICENSE); the template under
+[MIT-0](templates/LICENSE) — copy it freely, no attribution needed. Diagrams
+are text-defined (Mermaid).*
