@@ -1,4 +1,4 @@
-# Groundwork: Setting Up Claude Code So It Works *For* You
+# Foundation: Setting Up Claude Code So It Works *For* You
 
 A practical guide to configuring an AI coding agent (written against Claude
 Code, but the ideas carry to any agent) so that it stays useful, honest, and
