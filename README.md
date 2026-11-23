@@ -212,7 +212,38 @@ Small rules that save a lot of time and attention:
 
 ---
 
-## 9. Using the starter kit
+## 9. Command safety
+
+An agent types shell commands faster than you can read them. A few rules keep
+one typo from becoming an outage.
+
+- **Look before you delete.** Before removing or overwriting anything, the
+  agent inspects the target: what is in it, whether it is a live checkout or
+  in use, and whether anything else points at it. A directory that merely
+  *looks* empty or stale may be a clone still downloading, another session's
+  work, or a mount. Reflexive `rm -rf` is how repositories and cloud
+  workspaces get lost.
+- **Deletion is an ask-first action, every time.** Approval for one deletion
+  does not cover the next. This applies to local folders, cloud sessions,
+  branches, repositories and environments.
+- **Prefer reversible.** Move it aside, back it up, or snapshot it first. If an
+  action can't be undone, say so plainly before running it.
+- **Guard every destructive path variable.** Write `rm -rf -- "${dir:?}"`
+  rather than `rm -rf "$dir"`. If `dir` is empty, the first form refuses to
+  run and the second can aim at the filesystem root.
+- **Quote every expansion.** `"$var"`, never bare `$var`.
+- **Make temporary directories safe.** Create one with `mktemp -d`, then
+  `trap 'rm -rf -- "${dir:?}"' EXIT` to clean up.
+- **Chain with care.** Start multi-step one-liners with
+  `set -euo pipefail`. Note that `set -e` does not stop `local x=$(cmd)`;
+  declare first, then assign.
+- **Cloud and ephemeral sessions are still real.** A disposable container can
+  hold the only copy of unpushed work, so commit and push before ending a
+  session.
+
+---
+
+## 10. Using the starter kit
 
 1. Copy [`templates/CLAUDE.md`](templates/CLAUDE.md) to your repository root.
 2. Fill in every `<placeholder>` — especially your project's one-line

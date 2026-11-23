@@ -77,6 +77,11 @@ All of these must pass before any commit. No "fix later":
 <dependency / license audit command>
 ```
 
+- Before deleting or overwriting anything, inspect it first. Deletion is
+  ask-first every time, and approval for one does not cover the next.
+- In shell: quote every expansion, guard destructive paths with `"${var:?}"`,
+  and use `mktemp` plus `trap` for temporary directories.
+
 ## 5. Evidence rules
 
 - **Every test must be shown to fail.** Break the behaviour it protects,
