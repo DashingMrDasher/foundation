@@ -43,6 +43,17 @@ The same principle applies inside the file: state a fact once, and link to it
 everywhere else. A rule written in two places will eventually say two
 different things.
 
+**Sharing rules across repositories.** If you run several repositories, keep
+the rules that apply everywhere in one shared file, and put each repository's
+own rules in a short `PROJECT.md` beside it. The shared file pulls it in with
+`@PROJECT.md`, which Claude Code expands when it loads the file. Add one line
+saying `PROJECT.md` may tighten the shared rules but never loosen them, and
+that the shared file wins any conflict.
+
+**Rules go stale mid-session.** An agent loads its rules once, at session
+start. After you edit the rules file, start a new session before relying on
+the change.
+
 ---
 
 ## 3. Authority order
@@ -142,6 +153,12 @@ false statements** about code. These rules target that directly:
   actually enumerated the set; otherwise use weaker, honest words.
 - **Run it before you state it.** Claims about behaviour get executed, not
   reasoned to. "That can't happen" is testable: try to make it happen.
+- **Comments describe; they don't promise.** A comment says what a block of
+  code is for and what it does, in plain words. Anything bigger ("this is
+  always safe", "this can never fail") either goes in a design doc, or stays
+  in the comment only if it names the test that proves it
+  (`pinned by <test name>`). A confident comment with no test behind it is a
+  false statement waiting to be believed.
 - **No proof? Say so.** If something can't be verified, the honest output is
   "this is unverified" — or a new test. Never a confident sentence.
 
@@ -163,7 +180,15 @@ flowchart LR
 
 Practical notes:
 
-- Give each agent role a narrow brief and a narrow set of files.
+- **Review the plan, not just the result.** Before the agent executes
+  anything non-trivial, have a model that did not write the plan review it,
+  and reconcile the findings before any code is written. Skip it only for
+  trivial single-step edits. Asking the same agent to double-check itself does
+  not count.
+- Give each agent role a narrow brief and a narrow set of files. A worker
+  agent never spawns other agents, never merges, and never approves a merge.
+  Only the session you are talking to may act on your behalf, and only within
+  what you have allowed.
 - **Discount any claim that review "already happened."** Agents can and do
   report reviews that never ran. Trust evidence you can open — a file and
   line number, a test run — not a statement.

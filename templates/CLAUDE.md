@@ -4,6 +4,12 @@ Single source of truth for every AI agent working in this repository. Other
 agent config files (AGENTS.md, .cursorrules, …) are symlinks to this file.
 These rules are binding, not advisory.
 
+<!-- Delete this block if you have a single repository. -->
+@PROJECT.md
+
+`PROJECT.md` adds to this file and may tighten it, never loosen it. On any
+conflict this file wins.
+
 ## 1. Identity
 
 <One or two sentences: what this project is, and what it is NOT.>
@@ -83,17 +89,23 @@ All of these must pass before any commit. No "fix later":
   a commit, comment or report is looked up at the time of writing. Words like
   *always, never, every, only, impossible* require an actual enumeration.
 - **Run it before stating it.** Behaviour claims are executed, not reasoned.
+- **Comments describe, they don't promise.** A comment says what a block is
+  for and what it does. Claims about the wider system go in a doc, or name the
+  test that pins them.
 - **No proof, no claim.** If it can't be verified, say "unverified" or write
   the test.
 
 ## 6. Review
 
+- Before executing a non-trivial plan, a model that did not write it reviews
+  it. Skip only for trivial single-step edits.
 - Non-trivial changes are reviewed by a different model or a fresh agent
   before merge.
 - The author writes a short self-review first, with `file:line` evidence.
 - Claims that a review "already happened" are discounted; only openable
   evidence counts.
-- A worker agent edits only the files in its brief and never spawns others.
+- A worker agent edits only the files in its brief, never spawns other agents,
+  and never merges or approves a merge.
 
 ## 7. Output discipline
 
